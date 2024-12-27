@@ -11,6 +11,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -22,7 +24,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         
+    - name: Verify GIF file
+      run: |
+        if [ ! -f "lsp welcome.gif" ]; then
+          echo "Error: lsp welcome.gif not found"
+          exit 1
+        fi
+        
     - name: Run bot
       env:
         TOKEN: ${{ secrets.DISCORD_TOKEN }}
-      run: python main.py
+      run: |
+        python main.py
