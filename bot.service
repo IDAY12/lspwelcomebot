@@ -1,0 +1,14 @@
+[Unit]
+Description=Discord Welcome Bot
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/lspwelcomebot
+Environment=DISCORD_TOKEN=your_token_here
+ExecStart=/usr/bin/python3 main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
